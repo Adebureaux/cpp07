@@ -10,12 +10,56 @@ class Array
 	public:
 	Array(void) : _array(new T[0]), _size(0) {};
 	Array(unsigned int n) : _array(new T[n]), _size(n) {};
-	Array(const Array &other);
-	Array &operator=(const Array &other);
+	Array(const Array &other) : _array(NULL)
+	{
+		*this = other;
+	};
+	Array & operator=(const Array & other)
+	{
+		if (_array)
+			delete [] _array;
+		_size = other._size;
+		_array = new T[_size];
+		for (unsigned int i = 0; i < _size; i++)
+			_array[i] = *other._array;
+		return (*this);
+	};
 	~Array(void)
 	{
 		if (_array)
 			delete [] _array;
+	};
+
+	T & operator[](int index)
+	{
+		if (index > static_cast<int>(_size))
+			throw Array::IndexTooHigh();
+		else if (index < 0)
+			throw Array::IndexTooLow();
+		return (_array[index]);
+	};
+
+	class IndexTooHigh : public std::exception
+	{
+		public:
+		virtual const char* what() const throw()
+		{
+			return ("Exception : Index is out of range : Too high !");
+		};
+	};
+
+	class IndexTooLow : public std::exception
+	{
+		public:
+		virtual const char* what() const throw()
+		{
+			return ("Exception : Index is out of range : Too low !");
+		};
+	};
+
+	unsigned int size(void) const
+	{
+		return (_size);
 	};
 
 	private:
