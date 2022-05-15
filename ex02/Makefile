@@ -6,7 +6,7 @@ OBJS        = ${SRCS:.cpp=.o}
 
 RM          = rm -f
 
-CFLAGS      = -Wall -Wextra -Werror -std=c++98 -g
+CFLAGS      = -Wall -Wextra -Werror -std=c++98
 
 COMPILER    = c++
 

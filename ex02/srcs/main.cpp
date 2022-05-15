@@ -19,6 +19,9 @@ int main(int, char**)
         Array<int> test(tmp);
     }
 
+	std::cout << "Size of the array is : " << numbers.size() << std::endl;
+	numbers.display();
+
     for (int i = 0; i < MAX_VAL; i++)
     {
         if (mirror[i] != numbers[i])
@@ -48,6 +51,6 @@ int main(int, char**)
     {
         numbers[i] = rand();
     }
-    delete [] mirror;//
+    delete [] mirror;
     return 0;
 }

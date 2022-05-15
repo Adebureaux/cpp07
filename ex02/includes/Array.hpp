@@ -32,10 +32,11 @@ class Array
 
 	T & operator[](int index)
 	{
-		if (index > static_cast<int>(_size))
-			throw Array::IndexTooHigh();
-		else if (index < 0)
+		if (index < 0)
 			throw Array::IndexTooLow();
+		else if (index >= static_cast<int>(_size))
+			throw Array::IndexTooHigh();
+
 		return (_array[index]);
 	};
 
@@ -60,6 +61,23 @@ class Array
 	unsigned int size(void) const
 	{
 		return (_size);
+	};
+	
+	T & browse(int index) const
+	{
+		return (_array[index]);
+	};
+
+	void display(void) const
+	{
+		std::cout << "[ ";
+		for (unsigned int i = 0; i < _size; i++)
+		{
+			std::cout << browse(i);
+			if (i != _size - 1)
+				std::cout << ", ";
+		}
+		std::cout << " ]" << std::endl;
 	};
 
 	private:
